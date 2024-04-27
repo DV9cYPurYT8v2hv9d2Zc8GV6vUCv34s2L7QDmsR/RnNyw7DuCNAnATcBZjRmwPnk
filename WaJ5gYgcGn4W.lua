@@ -1,3 +1,4 @@
+local tpco
 local function genrng(min, max)
     return min + math.random() * (max - min)
 end
@@ -94,11 +95,12 @@ local function fun()
     local function runCoroutine(func)
         local co = coroutine.create(func)
         coroutine.resume(co)
+        return co
     end
     
     runCoroutine(FireGun)
     runCoroutine(FireGun)
-    runCoroutine(tprandom)
+    tpco = runCoroutine(tprandom)
 end
 
 local player = game.Players.LocalPlayer
@@ -108,6 +110,7 @@ local function startfun()
     local function respawnListener()
         while true do
             game:GetService("Players").PlayerAdded:Wait()
+            coroutine.yield(tpco)
             pcall(fun)  -- Call the function with pcall
         end
     end
@@ -117,6 +120,7 @@ local function startfun()
             local player = game:GetService("Players").LocalPlayer
             if player then
                 player.CharacterAdded:Wait()
+                coroutine.yield(tpco)
                 pcall(fun)  -- Call the function with pcall
             else
                 game:GetService("Players").PlayerAdded:Wait()
@@ -124,7 +128,7 @@ local function startfun()
         end
     end)()
     
-    fun() -- begin fun
+    print('respawn listener')
     respawnListener()  -- Start the respawn listener
 end
 
@@ -139,4 +143,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('dang i forgot to wait()')
+print('i think i fixed everything')
