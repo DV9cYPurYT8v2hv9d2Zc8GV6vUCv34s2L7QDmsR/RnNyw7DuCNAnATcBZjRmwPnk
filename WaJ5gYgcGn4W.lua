@@ -106,7 +106,6 @@ local function startfun()
         end)
     end)
     local chatrem = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
-    chatrem:FireServer('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !SERVER HAS BEEN NUKED! RIP SERVER 😂😂😂', "All")
     fun()
 end
 
