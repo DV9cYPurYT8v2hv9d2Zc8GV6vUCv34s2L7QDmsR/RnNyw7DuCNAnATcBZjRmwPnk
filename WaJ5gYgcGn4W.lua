@@ -77,7 +77,7 @@ local function fun()
         while true do
         coroutine.resume(coroutine.create(function()
             local bulletTable = {}
-            local y = 16
+            local y = 128
             while y > 1 do
                 table.insert(bulletTable, {
                     Hit = target,
@@ -149,4 +149,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('final maybe??!?!?!')
+print('real')
