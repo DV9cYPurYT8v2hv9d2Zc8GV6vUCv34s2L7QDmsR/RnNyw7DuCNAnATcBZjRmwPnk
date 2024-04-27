@@ -71,7 +71,7 @@ local function fun()
     
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
     
-    function FireGun(target)
+    local function FireGun(target)
         while true do
         coroutine.resume(coroutine.create(function()
             local bulletTable = {}
@@ -100,25 +100,31 @@ local player = game.Players.LocalPlayer
 local humanoid = player.Character:WaitForChild("Humanoid")
 
 local function startfun()
-    humanoid.Died:Connect(function()
-        player.CharacterAdded:Connect(function()
-            fun()
-        end)
-    end)
-    local chatrem = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
     fun()
+    local function respawnListener()
+        while true do
+            game:GetService("Players").PlayerAdded:Wait()
+            fun()
+        end
+    end
+
+    coroutine.wrap(function()
+        while true do
+            humanoid.Died:Wait()
+            coroutine.wrap(respawnListener)()
+            fun()
+        end
+    end)()
 end
 
 local player = game.Players.LocalPlayer
 local gui = player:WaitForChild("PlayerGui")
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = gui
-
 local button = Instance.new("TextButton")
 button.Parent = screenGui
 button.Position = UDim2.new(0.05, 0, 0.9, 0)
 button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
-
 button.MouseButton1Click:Connect(startfun)
