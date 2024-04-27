@@ -91,7 +91,6 @@ local function fun()
     local function tprandom()
         ihatevar = true
         while ihatevar do
-            print('you have been teleported')
             player.Character:MoveTo(Vector3.new(genrng(-10000000,10000000), genrng(500000,10000000), genrng(-10000000,10000000)))
             wait()
         end
