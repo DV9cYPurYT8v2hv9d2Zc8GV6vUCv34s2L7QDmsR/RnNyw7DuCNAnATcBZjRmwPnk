@@ -100,21 +100,26 @@ local player = game.Players.LocalPlayer
 local humanoid = player.Character:WaitForChild("Humanoid")
 
 local function startfun()
-    fun()
     local function respawnListener()
         while true do
             game:GetService("Players").PlayerAdded:Wait()
-            fun()
+            pcall(fun)  -- Call the function with pcall
         end
     end
 
     coroutine.wrap(function()
         while true do
-            humanoid.Died:Wait()
-            coroutine.wrap(respawnListener)()
-            fun()
+            local player = game:GetService("Players").LocalPlayer
+            if player then
+                player.CharacterAdded:Wait()
+                pcall(fun)  -- Call the function with pcall
+            else
+                game:GetService("Players").PlayerAdded:Wait()
+            end
         end
     end)()
+
+    respawnListener()  -- Start the respawn listener
 end
 
 local player = game.Players.LocalPlayer
@@ -128,4 +133,3 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('the coroutines update')
