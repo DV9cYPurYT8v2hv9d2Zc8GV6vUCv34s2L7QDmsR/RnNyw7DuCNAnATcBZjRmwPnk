@@ -88,6 +88,7 @@ local function fun()
     local function tprandom()
         while true do
             player.Character:MoveTo(Vector3.new(genrng(-10000000,10000000), genrng(500000,10000000), genrng(-10000000,10000000)))
+            wait()
         end
     end
     local function runCoroutine(func)
@@ -138,4 +139,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('tp update')
+print('dang i forgot to wait()')
