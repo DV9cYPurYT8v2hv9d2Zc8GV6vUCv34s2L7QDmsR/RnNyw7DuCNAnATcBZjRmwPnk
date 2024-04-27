@@ -77,12 +77,16 @@ local function fun()
         while true do
         coroutine.resume(coroutine.create(function()
             local bulletTable = {}
-            table.insert(bulletTable, {
-                Hit = target,
-                Distance = 10000,
-                Cframe = CFrame.new(0,1,1),
-                RayObject = Ray.new(Vector3.new(0.1,0.2), Vector3.new(0.3,0.4))
-            })
+            local y = 16
+            while y > 1 do
+                table.insert(bulletTable, {
+                    Hit = target,
+                    Distance = 10000,
+                    Cframe = CFrame.new(0,1,1),
+                    RayObject = Ray.new(Vector3.new(0.1,0.2), Vector3.new(0.3,0.4))
+                })
+                y -= 1
+            end
             game.ReplicatedStorage.ShootEvent:FireServer(bulletTable, Gun)
         end))
         wait()
@@ -145,4 +149,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('final perhaps')
+print('final maybe??!?!?!')
