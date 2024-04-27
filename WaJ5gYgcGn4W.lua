@@ -100,9 +100,11 @@ local function fun()
         local co = coroutine.create(func)
         coroutine.resume(co)
     end
-    
-    runCoroutine(FireGun)
-    runCoroutine(FireGun)
+    local x = 16
+    while x > 1 do
+        runCoroutine(FireGun)
+        x -= 1
+    end
     runCoroutine(tprandom)
 end
 
@@ -144,4 +146,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('final update maybe')
+print('final perhaps')
