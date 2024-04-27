@@ -41,6 +41,7 @@ local function dothat()
     workspace.Remote.ItemHandler:InvokeServer(unpack(args))
 end
 local function fun()
+    ihatevar = false
     print('wtf player died or new game')
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
@@ -72,6 +73,7 @@ local function fun()
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
     
     local function FireGun(target)
+        print('fire')
         while true do
         coroutine.resume(coroutine.create(function()
             local bulletTable = {}
@@ -89,6 +91,7 @@ local function fun()
     local function tprandom()
         ihatevar = true
         while ihatevar do
+            print('you have been teleported')
             player.Character:MoveTo(Vector3.new(genrng(-10000000,10000000), genrng(500000,10000000), genrng(-10000000,10000000)))
             wait()
         end
@@ -109,7 +112,6 @@ local humanoid = player.Character:WaitForChild("Humanoid")
 local function startfun()
     local function respawnListener()
         while true do
-            ihatevar = false
             game:GetService("Players").PlayerAdded:Wait()
             pcall(fun)  -- Call the function with pcall
         end
@@ -119,7 +121,6 @@ local function startfun()
         while true do
             local player = game:GetService("Players").LocalPlayer
             if player then
-                ihatevar = false
                 player.CharacterAdded:Wait()
                 pcall(fun)  -- Call the function with pcall
             else
@@ -143,4 +144,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('k i think i fixed')
+print('final update maybe')
