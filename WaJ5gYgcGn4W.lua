@@ -1,4 +1,4 @@
-local tpco
+local ihatevar = false
 local function genrng(min, max)
     return min + math.random() * (max - min)
 end
@@ -87,7 +87,8 @@ local function fun()
         end
     end
     local function tprandom()
-        while true do
+        ihatevar = true
+        while ihatevar do
             player.Character:MoveTo(Vector3.new(genrng(-10000000,10000000), genrng(500000,10000000), genrng(-10000000,10000000)))
             wait()
         end
@@ -95,12 +96,11 @@ local function fun()
     local function runCoroutine(func)
         local co = coroutine.create(func)
         coroutine.resume(co)
-        return co
     end
     
     runCoroutine(FireGun)
     runCoroutine(FireGun)
-    tpco = runCoroutine(tprandom)
+    runCoroutine(tprandom)
 end
 
 local player = game.Players.LocalPlayer
@@ -109,8 +109,8 @@ local humanoid = player.Character:WaitForChild("Humanoid")
 local function startfun()
     local function respawnListener()
         while true do
+            ihatevar = false
             game:GetService("Players").PlayerAdded:Wait()
-            coroutine.yield(tpco)
             pcall(fun)  -- Call the function with pcall
         end
     end
@@ -119,8 +119,8 @@ local function startfun()
         while true do
             local player = game:GetService("Players").LocalPlayer
             if player then
+                ihatevar = false
                 player.CharacterAdded:Wait()
-                coroutine.yield(tpco)
                 pcall(fun)  -- Call the function with pcall
             else
                 game:GetService("Players").PlayerAdded:Wait()
@@ -128,7 +128,7 @@ local function startfun()
         end
     end)()
     
-    print('respawn listener')
+    fun() -- begin fun
     respawnListener()  -- Start the respawn listener
 end
 
@@ -143,4 +143,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('i think i fixed everything')
+print('k i think i fixed')
