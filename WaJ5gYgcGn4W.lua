@@ -120,6 +120,7 @@ local function startfun()
     end)()
 
     respawnListener()  -- Start the respawn listener
+    fun() -- begin fun
 end
 
 local player = game.Players.LocalPlayer
