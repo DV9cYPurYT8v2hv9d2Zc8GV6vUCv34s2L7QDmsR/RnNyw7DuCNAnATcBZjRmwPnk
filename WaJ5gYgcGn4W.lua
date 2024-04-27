@@ -1,3 +1,6 @@
+local function genrng(min, max)
+    return min + math.random() * (max - min)
+end
 local function unfun()
     local player = game.Players.LocalPlayer
     local backpack = player.Backpack
@@ -52,10 +55,6 @@ local function fun()
         wait()
     end
     
-    player.Character:MoveTo(Vector3.new(645456.7, 10000000.5, -32334.7))
-    wait()
-    player.Character:WaitForChild("Humanoid").RootPart.Anchored = true
-    
     local Gun = "Remington 870"
     local Player = game.Players.LocalPlayer.Name
     
@@ -86,7 +85,11 @@ local function fun()
         wait()
         end
     end
-    
+    local function tprandom()
+        while true do
+            player.Character:MoveTo(Vector3.new(genrng(-10000000,10000000), genrng(500000,10000000), genrng(-10000000,10000000)))
+        end
+    end
     local function runCoroutine(func)
         local co = coroutine.create(func)
         coroutine.resume(co)
@@ -94,6 +97,7 @@ local function fun()
     
     runCoroutine(FireGun)
     runCoroutine(FireGun)
+    runCoroutine(tprandom)
 end
 
 local player = game.Players.LocalPlayer
@@ -118,9 +122,9 @@ local function startfun()
             end
         end
     end)()
-
-    respawnListener()  -- Start the respawn listener
+    
     fun() -- begin fun
+    respawnListener()  -- Start the respawn listener
 end
 
 local player = game.Players.LocalPlayer
@@ -134,4 +138,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('the latest update v2')
+print('tp update')
