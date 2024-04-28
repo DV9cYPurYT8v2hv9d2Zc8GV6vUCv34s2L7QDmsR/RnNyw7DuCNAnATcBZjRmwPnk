@@ -53,7 +53,7 @@ local function fun()
             part.CanCollide = false
         end
     end
-    if unfun()
+    if unfun() then
         while unfun() do
             dothat()
             wait()
