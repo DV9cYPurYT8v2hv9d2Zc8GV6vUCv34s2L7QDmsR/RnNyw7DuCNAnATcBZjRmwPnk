@@ -119,14 +119,15 @@ local humanoid = player.Character:WaitForChild("Humanoid")
 
 local function startfun()
     game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('ENDING SERVER IN 5','all')
-    sleep(1)
+    wait(1)
     game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('4','all')
-    sleep(1)
+    wait(1)
     game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('3','all')
-    sleep(1)
+    wait(1)
     game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('2','all')
-    sleep(1)
+    wait(1)
     game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('1','all')
+    wait(0.5)
     local function respawnListener()
         while true do
             game:GetService("Players").PlayerAdded:Wait()
@@ -161,7 +162,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('nahhhh')
+print('istg')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
