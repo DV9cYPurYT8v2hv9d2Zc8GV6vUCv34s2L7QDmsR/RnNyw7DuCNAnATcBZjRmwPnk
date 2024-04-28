@@ -72,9 +72,6 @@ local function fun()
     end
     
     Gun = game.Players[Player].Character[Gun]
-    
-    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
-    
     local function FireGun(target)
         print('fire')
         ihatevars = true
@@ -107,6 +104,7 @@ local function fun()
         local co = coroutine.create(func)
         coroutine.resume(co)
     end
+    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
     local x = 16
     while x > 1 do
         runCoroutine(FireGun)
@@ -121,6 +119,9 @@ local humanoid = player.Character:WaitForChild("Humanoid")
 local function startfun()
     local function respawnListener()
         while true do
+            while humanoid.Health > 0 do
+                wait()
+            end
             local player = game:GetService("Players").PlayerAdded:Wait()
             player.CharacterAdded:Connect(function()
                 pcall(fun)  -- Call the function with pcall when the character is added
@@ -132,6 +133,9 @@ local function startfun()
         while true do
             local player = game:GetService("Players").LocalPlayer
             if player then
+            	while humanoid.Health > 0 do
+                	wait()
+            	end
                 player.CharacterAdded:Wait()
                 pcall(fun)  -- Call the function with pcall when the character is added
             else
