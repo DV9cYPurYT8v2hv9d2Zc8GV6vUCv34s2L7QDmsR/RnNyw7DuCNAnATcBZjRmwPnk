@@ -53,10 +53,11 @@ local function fun()
             part.CanCollide = false
         end
     end
-    
-    while unfun() do
-        dothat()
-        wait()
+    if unfun()
+        while unfun() do
+            dothat()
+            wait()
+        end
     end
     
     local Gun = "Remington 870"
@@ -153,7 +154,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('begging for chatgpt to actually fix')
+print('i think i fixed it')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
