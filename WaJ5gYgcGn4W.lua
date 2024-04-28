@@ -78,7 +78,7 @@ local function fun()
         while ihatevars do
         coroutine.resume(coroutine.create(function()
             local bulletTable = {}
-            local y = 2048
+            local y = 256
             while y > 1 do
                 table.insert(bulletTable, {
                     Hit = target,
@@ -142,7 +142,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('plz work')
+print('reduced hopefully it will work lol')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
