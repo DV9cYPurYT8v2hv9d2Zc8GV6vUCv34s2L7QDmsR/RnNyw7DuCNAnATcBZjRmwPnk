@@ -118,16 +118,6 @@ local player = game.Players.LocalPlayer
 local humanoid = player.Character:WaitForChild("Humanoid")
 
 local function startfun()
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('ENDING SERVER IN 5','all')
-    wait(1)
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('4','all')
-    wait(1)
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('3','all')
-    wait(1)
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('2','all')
-    wait(1)
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('1','all')
-    wait(0.5)
     local function respawnListener()
         while true do
             game:GetService("Players").PlayerAdded:Wait()
