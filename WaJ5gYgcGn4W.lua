@@ -1,4 +1,5 @@
 local ihatevar = false
+local ihatevars = false
 local function genrng(min, max)
     return min + math.random() * (max - min)
 end
@@ -42,6 +43,7 @@ local function dothat()
 end
 local function fun()
     ihatevar = false
+    ihatevars = false
     print('wtf player died or new game')
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
@@ -74,7 +76,8 @@ local function fun()
     
     local function FireGun(target)
         print('fire')
-        while true do
+        ihatevars = true
+        while ihatevars do
         coroutine.resume(coroutine.create(function()
             local bulletTable = {}
             local y = 128
@@ -149,4 +152,4 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('real')
+print('unreal')
