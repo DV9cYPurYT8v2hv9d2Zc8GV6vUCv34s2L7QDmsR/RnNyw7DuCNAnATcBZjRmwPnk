@@ -1,3 +1,4 @@
+local ihatevar = false
 local ihatevars = false
 local function genrng(min, max)
     return min + math.random() * (max - min)
@@ -41,6 +42,7 @@ local function dothat()
     workspace.Remote.ItemHandler:InvokeServer(unpack(args))
 end
 local function fun()
+    ihatevar = false
     ihatevars = false
     print('wtf player died or new game')
     local player = game.Players.LocalPlayer
@@ -93,6 +95,13 @@ local function fun()
         wait()
         end
     end
+    local function tprandom()
+        ihatevar = true
+        while ihatevar do
+            player.Character:MoveTo(Vector3.new(genrng(-10000000,10000000), genrng(500000,10000000), genrng(-10000000,10000000)))
+            wait()
+        end
+    end
     local function runCoroutine(func)
         local co = coroutine.create(func)
         coroutine.resume(co)
@@ -102,12 +111,23 @@ local function fun()
         runCoroutine(FireGun)
         x -= 1
     end
+    runCoroutine(tprandom)
 end
 
 local player = game.Players.LocalPlayer
 local humanoid = player.Character:WaitForChild("Humanoid")
 
 local function startfun()
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('ENDING SERVER IN 5','all')
+    wait(1)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('4','all')
+    wait(1)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('3','all')
+    wait(1)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('2','all')
+    wait(1)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer('1','all')
+    wait(0.5)
     local function respawnListener()
         while true do
             game:GetService("Players").PlayerAdded:Wait()
@@ -142,7 +162,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('reduced hopefully it will work lol')
+print('alr alr last update i promise')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
