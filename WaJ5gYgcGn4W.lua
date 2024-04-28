@@ -120,8 +120,10 @@ local humanoid = player.Character:WaitForChild("Humanoid")
 local function startfun()
     local function respawnListener()
         while true do
-            game:GetService("Players").PlayerAdded:Wait()
-            pcall(fun)  -- Call the function with pcall
+            local player = game:GetService("Players").PlayerAdded:Wait()
+            player.CharacterAdded:Connect(function()
+                pcall(fun)  -- Call the function with pcall when the character is added
+            end)
         end
     end
 
@@ -130,14 +132,13 @@ local function startfun()
             local player = game:GetService("Players").LocalPlayer
             if player then
                 player.CharacterAdded:Wait()
-                pcall(fun)  -- Call the function with pcall
+                pcall(fun)  -- Call the function with pcall when the character is added
             else
                 game:GetService("Players").PlayerAdded:Wait()
             end
         end
     end)()
-    
-    fun() -- begin fun
+    fun()
     respawnListener()  -- Start the respawn listener
 end
 
@@ -152,7 +153,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('removed stupid cooldown')
+print('begging for chatgpt to actually fix')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
