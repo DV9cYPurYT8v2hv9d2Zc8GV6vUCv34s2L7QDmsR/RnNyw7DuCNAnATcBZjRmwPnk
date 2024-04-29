@@ -1,4 +1,9 @@
 local ihatevars = false
+local funcoroutine
+local function runCoroutine(func)
+    local co = coroutine.create(func)
+    coroutine.resume(co)
+end
 local function genrng(min, max)
     return min + math.random() * (max - min)
 end
@@ -74,10 +79,6 @@ local function fun()
         end
         print('firing stopped :(')
     end
-    local function runCoroutine(func)
-        local co = coroutine.create(func)
-        coroutine.resume(co)
-    end
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
     runCoroutine(FireGun)
     runCoroutine(FireGun)
@@ -85,38 +86,32 @@ local function fun()
     runCoroutine(FireGun)
 end
 
-local player = game.Players.LocalPlayer
-local humanoid = player.Character:WaitForChild("Humanoid")
-
 local function startfun()
-    local function respawnListener()
-        while true do
-            while humanoid.Health > 0 do
-                wait()
-            end
-            local player = game:GetService("Players").PlayerAdded:Wait()
-            player.CharacterAdded:Connect(function()
-                pcall(fun)  -- Call the function with pcall when the character is added
-            end)
+    local player = game.Players.LocalPlayer
+    local characterSpawned = false
+
+    local function onCharacterAdded(character)
+        if not characterSpawned then
+            characterSpawned = true
+            funcoroutine = runCoroutine(fun)
+        else
+            funcoroutine = runCoroutine(fun)
         end
+        
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.Died:Connect(function()
+            if funcoroutine ~= nil
+                coroutine.yield(fun)
+            end
+            ihatevars = false
+        end)
     end
 
-    coroutine.wrap(function()
-        while true do
-            local player = game:GetService("Players").LocalPlayer
-            if player then
-            	while humanoid.Health > 0 do
-                	wait()
-            	end
-                player.CharacterAdded:Wait()
-                pcall(fun)  -- Call the function with pcall when the character is added
-            else
-                game:GetService("Players").PlayerAdded:Wait()
-            end
-        end
-    end)()
-    fun()
-    respawnListener()  -- Start the respawn listener
+    player.CharacterAdded:Connect(onCharacterAdded)
+
+    if player.Character then
+        onCharacterAdded(player.Character)
+    end
 end
 
 local player = game.Players.LocalPlayer
@@ -130,7 +125,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('oof')
+print('update V2')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
