@@ -56,22 +56,23 @@ local function fun()
         print('fire')
         ihatevars = true
         while ihatevars do
-        coroutine.resume(coroutine.create(function()
-            local bulletTable = {}
-            local y = 256
-            while y > 1 do
-                table.insert(bulletTable, {
-                    Hit = target,
-                    Distance = 10000,
-                    Cframe = CFrame.new(0,1,1),
-                    RayObject = Ray.new(Vector3.new(0.1,0.2), Vector3.new(0.3,0.4))
-                })
-                y -= 1
-            end
-            game.ReplicatedStorage.ShootEvent:FireServer(bulletTable, Gun)
-        end))
+            coroutine.resume(coroutine.create(function()
+                local bulletTable = {}
+                local y = 256
+                while y > 1 do
+                    table.insert(bulletTable, {
+                        Hit = target,
+                        Distance = 10000,
+                        Cframe = CFrame.new(0,1,1),
+                        RayObject = Ray.new(Vector3.new(0.1,0.2), Vector3.new(0.3,0.4))
+                    })
+                    y -= 1
+                end
+                game.ReplicatedStorage.ShootEvent:FireServer(bulletTable, Gun)
+            end))
         wait()
         end
+        print('firing stopped :(')
     end
     local function runCoroutine(func)
         local co = coroutine.create(func)
