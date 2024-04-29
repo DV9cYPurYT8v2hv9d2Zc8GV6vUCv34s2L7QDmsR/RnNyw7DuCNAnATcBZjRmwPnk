@@ -14,32 +14,22 @@ local function unfun()
     end
     return true
 end
-local function dothat()
+function givegun()
     local player = game.Players.LocalPlayer
-    local remington870Part = workspace.Prison_ITEMS.giver["Remington 870"]
-    
-    if remington870Part then
-        local positionReferencePart = nil
-        for _, part in ipairs(remington870Part:GetChildren()) do
-            if part:IsA("BasePart") then
-                positionReferencePart = part
-                break
-            end
-        end
-    
-        if positionReferencePart then
-            local partPosition = positionReferencePart.Position
-            player.Character:MoveTo(partPosition)
+    local remington870 = workspace.Prison_ITEMS:FindFirstChild("Remington 870", true)
+    if remington870 then
+        local remote = workspace:FindFirstChild("Remote")
+        if remote then
+            remote.ItemHandler:InvokeServer({
+                Position = player.Character.Head.Position,
+                Parent = remington870
+            })
         else
-            warn("No suitable part found in the Remington 870 model.")
+            warn("Remote object not found")
         end
     else
-        warn("Remington 870 part not found!")
+        warn("Remington 870 object not found")
     end
-    local args = {
-        [1] = workspace.Prison_ITEMS.giver:FindFirstChild("Remington 870").ITEMPICKUP
-    }
-    workspace.Remote.ItemHandler:InvokeServer(unpack(args))
 end
 local function fun()
     ihatevar = false
@@ -47,17 +37,9 @@ local function fun()
     print('wtf player died or new game')
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
-    
-    for _, part in ipairs(character:GetDescendants()) do
-        if part:IsA("BasePart") then
-            part.CanCollide = false
-        end
-    end
-    if unfun() then
-        while unfun() do
-            dothat()
-            wait()
-        end
+    while unfun() do
+        givegun()
+        wait()
     end
     
     local Gun = "Remington 870"
@@ -93,24 +75,12 @@ local function fun()
         wait()
         end
     end
-    local function tprandom()
-        ihatevar = true
-        while ihatevar do
-            player.Character:MoveTo(Vector3.new(genrng(-10000000,10000000), genrng(500000,10000000), genrng(-10000000,10000000)))
-            wait()
-        end
-    end
     local function runCoroutine(func)
         local co = coroutine.create(func)
         coroutine.resume(co)
     end
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
-    local x = 16
-    while x > 1 do
-        runCoroutine(FireGun)
-        x -= 1
-    end
-    runCoroutine(tprandom)
+    runCoroutine(FireGun)
 end
 
 local player = game.Players.LocalPlayer
