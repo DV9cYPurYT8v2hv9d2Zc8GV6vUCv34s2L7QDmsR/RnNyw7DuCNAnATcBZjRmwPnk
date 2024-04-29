@@ -100,7 +100,7 @@ local function startfun()
         
         local humanoid = character:WaitForChild("Humanoid")
         humanoid.Died:Connect(function()
-            if funcoroutine ~= nil
+            if funcoroutine ~= nil then
                 coroutine.yield(fun)
             end
             ihatevars = false
