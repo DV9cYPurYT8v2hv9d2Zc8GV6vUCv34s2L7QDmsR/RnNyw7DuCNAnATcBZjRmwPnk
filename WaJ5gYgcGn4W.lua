@@ -1,4 +1,3 @@
-local ihatevar = false
 local ihatevars = false
 local function genrng(min, max)
     return min + math.random() * (max - min)
@@ -32,7 +31,6 @@ function givegun()
     end
 end
 local function fun()
-    ihatevar = false
     ihatevars = false
     print('wtf player died or new game')
     local player = game.Players.LocalPlayer
