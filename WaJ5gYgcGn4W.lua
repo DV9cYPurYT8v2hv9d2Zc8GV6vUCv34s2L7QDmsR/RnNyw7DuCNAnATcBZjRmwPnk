@@ -79,6 +79,9 @@ local function fun()
     end
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
     runCoroutine(FireGun)
+    runCoroutine(FireGun)
+    runCoroutine(FireGun)
+    runCoroutine(FireGun)
 end
 
 local player = game.Players.LocalPlayer
@@ -126,7 +129,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('probably better')
+print('oof')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
