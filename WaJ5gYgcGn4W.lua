@@ -85,10 +85,11 @@ local function fun()
     end
     print('done function')
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
-    runCoroutine(function() FireGun() end)
-    runCoroutine(function() FireGun() end)
-    runCoroutine(function() FireGun() end)
-    runCoroutine(function() FireGun() end)
+    local x = 256
+    while x > 0 do
+        runCoroutine(function() FireGun() end)
+        x -= 1
+    end
     print('ran firegun')
 end
 
@@ -131,7 +132,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('update V2.1')
+print('update V2.11')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
