@@ -42,11 +42,12 @@ local function fun()
     local character = player.Character or player.CharacterAdded:Wait()
     if unfun() then
         while unfun() do
-            givegun()
+            runCoroutine(givegun)
+            print('attempted to get gun')
             wait()
         end
     end
-    
+    print('got gun')
     local Gun = "Remington 870"
     local Player = game.Players.LocalPlayer.Name
     
@@ -59,6 +60,7 @@ local function fun()
     end
     
     Gun = game.Players[Player].Character[Gun]
+    print('yap yap')
     local function FireGun(target)
         print('fire')
         ihatevars = true
@@ -81,11 +83,13 @@ local function fun()
         end
         print('firing stopped :(')
     end
+    print('done function')
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
     runCoroutine(function() FireGun() end)
     runCoroutine(function() FireGun() end)
     runCoroutine(function() FireGun() end)
     runCoroutine(function() FireGun() end)
+    print('ran firegun')
 end
 
 local function startfun()
