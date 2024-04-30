@@ -40,9 +40,11 @@ local function fun()
     print('wtf player died or new game')
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
-    while unfun() do
-        givegun()
-        wait()
+    if unfun() then
+        while unfun() do
+            givegun()
+            wait()
+        end
     end
     
     local Gun = "Remington 870"
@@ -75,15 +77,15 @@ local function fun()
                 end
                 game.ReplicatedStorage.ShootEvent:FireServer(bulletTable, Gun)
             end))
-        wait()
+            wait()
         end
         print('firing stopped :(')
     end
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
-    runCoroutine(FireGun)
-    runCoroutine(FireGun)
-    runCoroutine(FireGun)
-    runCoroutine(FireGun)
+    runCoroutine(function() FireGun() end)
+    runCoroutine(function() FireGun() end)
+    runCoroutine(function() FireGun() end)
+    runCoroutine(function() FireGun() end)
 end
 
 local function startfun()
@@ -125,7 +127,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('update V2')
+print('update V2.1')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
