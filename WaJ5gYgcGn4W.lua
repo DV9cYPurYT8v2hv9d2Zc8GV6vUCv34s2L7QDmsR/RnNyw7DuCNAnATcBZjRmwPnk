@@ -71,7 +71,7 @@ local function fun()
                 while y > 1 do
                     table.insert(bulletTable, {
                         Hit = target,
-                        Distance = 10000,
+                        Distance = genrng(10000,100000),
                         Cframe = CFrame.new(0,1,1),
                         RayObject = Ray.new(Vector3.new(0.1,0.2), Vector3.new(0.3,0.4))
                     })
