@@ -71,9 +71,9 @@ local function fun()
                 while y > 1 do
                     table.insert(bulletTable, {
                         Hit = target,
-                        Distance = genrng(10000,100000),
-                        Cframe = CFrame.new(0,1,1),
-                        RayObject = Ray.new(Vector3.new(0.1,0.2), Vector3.new(0.3,0.4))
+                        Distance = genrng(100000,1000000),
+                        Cframe = CFrame.new(genrng(100000,1000000),genrng(100000,1000000),genrng(100000,1000000)),
+                        RayObject = Ray.new(Vector3.new(genrng(100000,1000000),genrng(100000,1000000)), Vector3.new(genrng(100000,1000000),genrng(100000,1000000)))
                     })
                     y -= 1
                 end
@@ -85,7 +85,7 @@ local function fun()
     end
     print('done function')
     game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
-    local x = 256
+    local x = 32
     while x > 0 do
         runCoroutine(function() FireGun() end)
         x -= 1
@@ -132,7 +132,7 @@ button.Size = UDim2.new(0, 100, 0, 50)
 button.Text = "Nuke server"
 button.TextSize = 10
 button.MouseButton1Click:Connect(startfun)
-print('update V2.11')
+print('update V2.13')
 
 for _, player in ipairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
